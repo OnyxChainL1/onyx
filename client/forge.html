@@ -31,8 +31,8 @@ pre.cmd{background:#0b0b0b;border:1px solid var(--line);border-radius:10px;paddi
 <div class="f"><input id="ad" placeholder="your onx1… address (from /wallet)" spellcheck="false"><textarea id="sg" placeholder="signature, hex (3,309 bytes = 6,618 hex characters)" spellcheck="false"></textarea><div><button class="btn" onclick="sub()">Verify my forgery</button></div><div id="out"></div></div>
 
 <h2>Or script it</h2><p class="sub">Fetch the key, try your attack, submit.</p>
-<pre class="cmd">curl https://onyxchain.net/api/forge
-curl -X POST https://onyxchain.net/api/forge \
+<pre class="cmd">curl https://onyxchain.org/api/forge
+curl -X POST https://onyxchain.org/api/forge \
   -H "content-type: application/json" \
   -d '{"address":"onx1…","sig":"&lt;hex&gt;"}'</pre>
 </main>

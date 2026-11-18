@@ -20,7 +20,7 @@ table.vt{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}.vt 
 
 <h2>Join in three steps</h2><p class="sub">Requires Node.js 24 or newer (native ML-DSA). No other dependencies.</p>
 <div class="steps">
-<div class="card"><span class="kick">01</span><b>Download the node</b><p>One file, no install. Read it first: it's about 70 lines.</p><pre class="cmd">curl -O https://onyxchain.net/onyx-node.js</pre></div>
+<div class="card"><span class="kick">01</span><b>Download the node</b><p>One file, no install. Read it first: it's about 70 lines.</p><pre class="cmd">curl -O https://onyxchain.org/onyx-node.js</pre></div>
 <div class="card"><span class="kick">02</span><b>Start it with a name</b><p>Creates <code>onyx-validator.json</code> (your key, keep it secret), funds it from the faucet, stakes 500 tONYX and joins.</p><pre class="cmd">node onyx-node.js "Your Name"</pre></div>
 <div class="card"><span class="kick">03</span><b>Keep it online</b><p>Your node recomputes each header hash itself before signing it. Offline over 20s and you drop out of rotation. Leave any time and your stake comes back.</p><pre class="cmd">node onyx-node.js --exit</pre></div>
 </div>

@@ -1,6 +1,6 @@
 // onyx.js: the ONYX SDK. One ES module, no build step. Works in browsers and Node 18+.
-//   import { ONYX, wallet } from 'https://onyxchain.net/onyx.js';
-//   const onyx = new ONYX();                       // defaults to https://onyxchain.net/rpc
+//   import { ONYX, wallet } from 'https://onyxchain.org/onyx.js';
+//   const onyx = new ONYX();                       // defaults to https://onyxchain.org/rpc
 //   await onyx.blockNumber();
 //   const w = await wallet();                    // new ML-DSA-44 wallet (or wallet(seedHex) to restore)
 //   await onyx.send(w, 'onx1…', 25);              // signs ML-DSA-44 locally, submits via onyx_sendTransaction
@@ -18,7 +18,7 @@ export async function wallet(seedHex) {
 }
 
 export class ONYX {
-  constructor(url = (typeof location !== 'undefined' && /onyx|localhost/.test(location.host) ? location.origin : 'https://onyxchain.net') + '/rpc') { this.url = url; this.id = 0; }
+  constructor(url = (typeof location !== 'undefined' && /onyx|localhost/.test(location.host) ? location.origin : 'https://onyxchain.org') + '/rpc') { this.url = url; this.id = 0; }
   async call(method, ...params) { const r = await (await fetch(this.url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: ++this.id, method, params }) })).json();
     if (r.error) throw Object.assign(new Error(r.error.message), { code: r.error.code }); return r.result; }
   chainId() { return this.call('onyx_chainId'); }

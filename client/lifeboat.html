@@ -72,7 +72,7 @@ $('go').onclick = async () => { $('go').disabled = true; const m = (await (await
   const r = await (await fetch('/api/lifeboat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ sol: SOL, onyx: W.addr, solSig, pub: W.pub, sig }) })).json();
   if (r.error) { $('lg').innerHTML = `<span class="bad">${esc(r.error)}</span>`; $('go').disabled = false; return; }
   $('lg').innerHTML = '<span class="okc">Both signatures verified. Boarding written to the next block.</span>'; step(3, 'done'); ticket(r); load(); };
-function ticket(b) { const tw = `I just boarded the Lifeboat.\n\nSeat #${b.seat} · ${b.tier}. My Solana wallet is bound to a post-quantum ML-DSA address on ONYX.\n\nYour Ed25519 key is exposed. Board: onyxchain.net/lifeboat\n\n$ONYX`;
+function ticket(b) { const tw = `I just boarded the Lifeboat.\n\nSeat #${b.seat} · ${b.tier}. My Solana wallet is bound to a post-quantum ML-DSA address on ONYX.\n\nYour Ed25519 key is exposed. Board: onyxchain.org/lifeboat\n\n$ONYX`;
   $('tk').innerHTML = `<div class="card ticket"><div class="tp"><span class="kick">boarding pass · onyx-testnet-1</span><div style="display:flex;justify-content:space-between;align-items:end;margin-top:12px;flex-wrap:wrap;gap:12px"><div class="big">Seat #${b.seat}</div><div class="big g">${b.tier}</div></div></div>
    <div class="tb"><div><div class="lbl">From · Ed25519</div><div class="v bad">${esc(b.sol.slice(0, 6) + '…' + b.sol.slice(-6))}</div></div><div><div class="lbl">To · ML-DSA-44</div><div class="v okc">${short(b.onyx, 10, 6)}</div></div>
    <div><div class="lbl">$ONYX held</div><div class="v">${n(b.held, 2)}</div></div><div><div class="lbl">Grant · points</div><div class="v">${n(b.grant)} tONYX · +${b.pts}</div></div>

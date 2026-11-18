@@ -6,7 +6,7 @@
 //   node onyx-node.js --exit     unstake and leave the set
 'use strict';
 const crypto = require('crypto'), fs = require('fs'), path = require('path');
-const RPC = process.env.ONYX_RPC || 'https://onyxchain.net';
+const RPC = process.env.ONYX_RPC || 'https://onyxchain.org';
 const KEYFILE = process.env.ONYX_KEY || path.join(process.cwd(), 'onyx-validator.json');
 const CHAIN = 'onyx-testnet-1';
 if (+process.versions.node.split('.')[0] < 24) { console.error('Node 24+ required (native ML-DSA). You have ' + process.version); process.exit(1); }

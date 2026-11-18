@@ -17,7 +17,7 @@ pre{background:#080808;border:1px solid var(--line);border-radius:12px;padding:1
 <section class="hero"><span class="kick">// public rpc · sdk · live on testnet</span>
 <h1>Build on a<br><span class="g">post-quantum chain.</span></h1>
 <p>A public JSON-RPC 2.0 endpoint, open CORS, batch requests. Plus <b style="color:var(--tx)">onyx.js</b>, a one-file SDK that signs ML-DSA-44 transactions locally. No API key, no install.</p>
-<div class="ep"><code>https://onyxchain.net/rpc</code><button class="btn pri" onclick="copy('https://onyxchain.net/rpc')">Copy</button></div></section>
+<div class="ep"><code>https://onyxchain.org/rpc</code><button class="btn pri" onclick="copy('https://onyxchain.org/rpc')">Copy</button></div></section>
 <div class="kpis" id="kp"></div>
 <div class="lay">
 <div class="card pn"><h3>Playground <span class="lat" id="lat"></span></h3>
@@ -47,7 +47,7 @@ $('run').onclick = async () => { let params; try { params = JSON.parse($('pa').v
   const body = { jsonrpc: '2.0', id: 1, method: $('m').value, params }, t0 = performance.now();
   const r = await (await fetch('/rpc', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })).json();
   $('lat').textContent = (performance.now() - t0).toFixed(0) + ' ms'; const s = JSON.stringify(r, null, 2); $('out').textContent = s.length > 6000 ? s.slice(0, 6000) + '\n…' : s; stats(); };
-const SRC = `<span class="kw">import</span> { ONYX, wallet } <span class="kw">from</span> <span class="s">'https://onyxchain.net/onyx.js'</span>;
+const SRC = `<span class="kw">import</span> { ONYX, wallet } <span class="kw">from</span> <span class="s">'https://onyxchain.org/onyx.js'</span>;
 
 <span class="kw">const</span> onyx = <span class="kw">new</span> ONYX();
 <span class="kw">const</span> me = <span class="kw">await</span> wallet();          <span class="c">// ML-DSA-44 keypair, local</span>

@@ -6,7 +6,7 @@ const PORT = +process.env.PORT || 8300;
 const DATA = process.env.DATA_PATH || path.join(__dirname, '..', 'data.json');
 const CLIENT = path.join(__dirname, '..', 'client');
 const SLOT_MS = 4000, FAUCET_AMT = 1000, FAUCET_COOLDOWN = 3600e3, FEE = 0.001, KEEP_BLOCKS = 4000;
-const ONYX_MINT = process.env.ONYX_MINT || '', SITE_URL = (process.env.SITE_URL || '').replace(/\/$/, ''), X_URL = process.env.X_URL || '', GH_URL = process.env.GH_URL || '';
+const ONYX_MINT = process.env.ONYX_MINT || '', SITE_URL = (process.env.SITE_URL || '').replace(/\/$/, ''), X_URL = process.env.X_URL || 'https://x.com/OnyxChainL1', GH_URL = process.env.GH_URL || '';
 
 const sha3 = (b) => crypto.createHash('sha3-256').update(b).digest('hex');
 const canon = (o) => JSON.stringify(o, Object.keys(o).sort());
@@ -430,7 +430,7 @@ http.createServer(async (req, res) => {
     if (!fp.startsWith(CLIENT) || !fs.existsSync(fp) || fs.statSync(fp).isDirectory()) { res.writeHead(404); return res.end('not found'); }
     const ext = path.extname(fp), type = MIME[ext] || 'application/octet-stream';
     // pages and scripts carry the site's own address and X link, filled in as they are served
-    if (ext === '.html' || ext === '.js') { const origin = SITE_URL || (req.headers['x-forwarded-proto'] || 'http') + '://' + req.headers.host; res.writeHead(200, { 'content-type': type, 'cache-control': 'no-cache' }); return res.end(fs.readFileSync(fp, 'utf8').replaceAll('https://onyxchain.net', origin).replaceAll('{{X_URL}}', X_URL).replaceAll('{{GH_URL}}', GH_URL)); }
+    if (ext === '.html' || ext === '.js') { const origin = SITE_URL || (req.headers['x-forwarded-proto'] || 'http') + '://' + req.headers.host; res.writeHead(200, { 'content-type': type, 'cache-control': 'no-cache' }); return res.end(fs.readFileSync(fp, 'utf8').replaceAll('https://onyxchain.org', origin).replaceAll('{{X_URL}}', X_URL).replaceAll('{{GH_URL}}', GH_URL)); }
     res.writeHead(200, { 'content-type': type }); fs.createReadStream(fp).pipe(res);
   } catch (e) { send(res, 500, { error: String(e.message || e) }); }
 }).listen(PORT, () => console.log('ONYX testnet on :' + PORT, 'height', S.height));

@@ -37,7 +37,7 @@ async function go() { const a = $('a').value.trim(); if (!a) return; history.rep
   let r; try { r = await (await fetch('/api/scan?a=' + encodeURIComponent(a))).json(); } catch { r = { error: 'network error' }; }
   if (r.error) { $('res').innerHTML = `<div class="card rc"><span class="m" style="color:var(--bad,#ff5a4d)">${esc(r.error)}</span></div>`; return; }
   const v = r.exposed, amt = r.balance.toLocaleString(undefined, { maximumFractionDigits: 6 }) + ' ' + r.chain;
-  const share = v ? `My ${NAME[r.chain]} wallet is quantum-exposed. ${r.usd ? usd(r.usd) + ' sits behind a public key Shor’s algorithm can reverse.' : 'Its public key is already on-chain.'}\n\nCheck yours: onyxchain.net/scan\n\n$ONYX` : `My ${NAME[r.chain]} wallet's public key is still hidden. The first transaction exposes it.\n\nCheck yours: onyxchain.net/scan\n\n$ONYX`;
+  const share = v ? `My ${NAME[r.chain]} wallet is quantum-exposed. ${r.usd ? usd(r.usd) + ' sits behind a public key Shor’s algorithm can reverse.' : 'Its public key is already on-chain.'}\n\nCheck yours: onyxchain.org/scan\n\n$ONYX` : `My ${NAME[r.chain]} wallet's public key is still hidden. The first transaction exposes it.\n\nCheck yours: onyxchain.org/scan\n\n$ONYX`;
   $('res').innerHTML = `<div class="card rc ${v ? 'bad' : 'ok'}"><span class="kick" style="color:${v ? '#ff5a4d' : 'var(--ok)'}">${NAME[r.chain]} · ${esc(r.scheme)}</span>
    <div class="verdict">${v ? '<span style="color:#ff5a4d">EXPOSED.</span> Public key is on-chain.' : '<span style="color:var(--ok)">Hidden, for now.</span>'}</div>
    <div class="addr">${esc(r.address)}</div>
