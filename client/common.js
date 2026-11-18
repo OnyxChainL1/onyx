@@ -1,5 +1,5 @@
 // shared pill nav, footer and helpers for every ONYX page
-const X_URL = '{{X_URL}}', GH_URL = '{{GH_URL}}';
+const abs = (u) => (u && !u.startsWith('http://') && !u.startsWith('https://') ? 'https://' + u : u),X_URL = abs('{{X_URL}}'), GH_URL = abs('{{GH_URL}}');
 // the mark: a cut stone, six facets around a polished table
 const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lgo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c8ccd2"/><stop offset="1" stop-color="#6f747d"/></linearGradient></defs><path d="M20 3 34.7 11.5v17L20 37 5.3 28.5v-17Z" fill="#131313" stroke="url(#lgo)" stroke-width="2"/><path d="M20 3v11M34.7 11.5 26 16M34.7 28.5 26 24M20 37V26M5.3 28.5 14 24M5.3 11.5 14 16" stroke="url(#lgo)" stroke-width="1.1" opacity=".7"/><path d="M20 14 26 16v8l-6 2-6-2v-8Z" fill="url(#lgo)"/></svg>';
 const NAV = [['/explorer', 'Explorer'], ['/wallet', 'Wallet'], ['/launchpad', 'Launchpad'], ['/dex', 'DEX'], ['/vault', 'Vaults'], ['/node', 'Run a node'], ['/rpc', 'Build']];
