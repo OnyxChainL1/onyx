@@ -6,7 +6,7 @@ const PORT = +process.env.PORT || 8300;
 const DATA = process.env.DATA_PATH || path.join(__dirname, '..', 'data.json');
 const CLIENT = path.join(__dirname, '..', 'client');
 const SLOT_MS = 4000, FAUCET_AMT = 1000, FAUCET_COOLDOWN = 3600e3, FEE = 0.001, KEEP_BLOCKS = 4000;
-const ONYX_MINT = process.env.ONYX_MINT || '', SITE_URL = (process.env.SITE_URL || '').replace(/\/$/, ''), X_URL = process.env.X_URL || 'https://x.com/OnyxChainL1', GH_URL = process.env.GH_URL || 'https://github.com/OnyxChainL1/onyx';
+const ONYX_MINT = process.env.ONYX_MINT || '', absUrl = (u) => { u = (u || '').trim(); return u && !/^https?:\/\//i.test(u) ? 'https://' + u.replace(/^\/+/, '') : u; }, SITE_URL = absUrl(process.env.SITE_URL).replace(/\/$/, ''), X_URL = absUrl(process.env.X_URL) || 'https://x.com/OnyxChainL1', GH_URL = absUrl(process.env.GH_URL) || 'https://github.com/OnyxChainL1/onyx';
 
 const sha3 = (b) => crypto.createHash('sha3-256').update(b).digest('hex');
 const canon = (o) => JSON.stringify(o, Object.keys(o).sort());
