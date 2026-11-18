@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/badge/license-MIT-c8ccd2)](LICENSE) [![node](https://img.shields.io/badge/node-%E2%89%A5%2024-c8ccd2)](.node-version) [![dependencies](https://img.shields.io/badge/dependencies-0-c8ccd2)](package.json)
 
-**[onyxchain.org](https://onyxchain.org)** · [Docs](https://onyxchain.org/docs) · [X](https://x.com/OnyxChainL1) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md)
+**[onyxchain.org](https://onyxchain.org)** · [Docs](https://onyxchain.org/docs) · [X](https://x.com/OnyxL1Chain) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md)
 
 [Changelog](CHANGELOG.md) · [Security](SECURITY.md)
 
