@@ -26,6 +26,6 @@ Node 24 or newer.
 1. Branch from `dev`.
 2. Keep the change small and add a test that fails without it.
 3. Run the tests.
-4. Open a pull request against `dev`. CI runs the syntax check and the test suite.
+4. Open a pull request against `dev`, and say which tests you ran.
 
 Security issues go through [private reporting](https://github.com/OnyxChainL1/onyx/security/advisories/new), not pull requests.

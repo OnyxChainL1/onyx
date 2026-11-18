@@ -1,6 +1,6 @@
 # ONYX
 
-[![ci](https://github.com/OnyxChainL1/onyx/actions/workflows/ci.yml/badge.svg)](https://github.com/OnyxChainL1/onyx/actions/workflows/ci.yml) [![license](https://img.shields.io/badge/license-MIT-c8ccd2)](LICENSE) [![node](https://img.shields.io/badge/node-%E2%89%A5%2024-c8ccd2)](.node-version) [![dependencies](https://img.shields.io/badge/dependencies-0-c8ccd2)](package.json)
+[![license](https://img.shields.io/badge/license-MIT-c8ccd2)](LICENSE) [![node](https://img.shields.io/badge/node-%E2%89%A5%2024-c8ccd2)](.node-version) [![dependencies](https://img.shields.io/badge/dependencies-0-c8ccd2)](package.json)
 
 [Changelog](CHANGELOG.md) · [Security](SECURITY.md)
 
