@@ -24,7 +24,7 @@ npm test       # launchpad end-to-end: real ML-DSA-44 signatures against an in-p
 | `PORT` | `8300` | HTTP port |
 | `DATA_PATH` | `./data.json` | Chain state. Put it on a persistent disk |
 | `SITE_URL` | request origin | The site's public address, written into the docs, SDK and node script as they are served |
-| `X_URL`, `GH_URL` | empty | Links shown in the nav and footer |
+| `X_URL`, `GH_URL` | the project's X and GitHub | Links shown in the nav and footer |
 | `ONYX_MINT` | empty | The $ONYX token address, shown on the front page once it exists |
 | `ADMIN_KEY`, `GH_TOKEN`, `FORGE_ONYX` | empty | Points grants, GitHub API quota for tech launches, Forge bounty text |
 

@@ -53,3 +53,5 @@ footer.foot p{grid-column:1/-1;font:400 11px/1.7 var(--mono);color:var(--steel);
   header.nav.open nav{display:flex;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;gap:0;background:var(--void);border:1px solid var(--line2);border-radius:14px;padding:8px}header.nav.open nav a{padding:12px 10px}}
 @media(max-width:760px){footer.foot .wrap{grid-template-columns:1fr}footer.foot .fl{justify-content:flex-start}main.wrap{padding-top:104px!important}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+@media(max-width:520px){header.nav .ow{display:none}}
