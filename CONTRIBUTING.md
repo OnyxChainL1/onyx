@@ -1,0 +1,31 @@
+# Contributing
+
+Thanks for looking. ONYX is one Node.js program with no dependencies.
+
+## Getting set up
+
+```bash
+git clone https://github.com/OnyxChainL1/onyx
+cd onyx
+npm start            # http://localhost:8300
+npm test             # end-to-end: real ML-DSA-44 signatures against an in-process node
+```
+
+Node 24 or newer.
+
+## Where things live
+
+- `server/index.js` is the chain: state, block production, attestations, the HTTP API and the JSON-RPC.
+- `server/launchpad.js` is the token launchpad: bonding curve, fees, GitHub verification for tech tokens.
+- `client/` is the site: one HTML file per page, a shared `onyx.css` and `common.js`.
+- `client/onyx.js` is the SDK and `client/onyx-node.js` is the single-file validator.
+- `test/` holds the end-to-end suite.
+
+## Making a change
+
+1. Branch from `dev`.
+2. Keep the change small and add a test that fails without it.
+3. Run the tests.
+4. Open a pull request against `dev`. CI runs the syntax check and the test suite.
+
+Security issues go through [private reporting](https://github.com/OnyxChainL1/onyx/security/advisories/new), not pull requests.
