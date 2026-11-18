@@ -24,9 +24,18 @@ function fresh() {
   });
   return { genesis: Date.now(), height: 0, blocks: [], accounts: {}, faucet: {}, txIndex: {}, validators: vals, totalTx: 0, sigsVerified: 0 };
 }
-try { S = JSON.parse(fs.readFileSync(DATA, 'utf8')); } catch { S = fresh(); }
+// load the newest state file that parses: the live one, else the previous generation. A half-written file must never restart the chain.
+const readState = (p) => { try { const o = JSON.parse(fs.readFileSync(p, 'utf8')); return o && o.blocks && o.accounts ? o : null; } catch { return null; } };
+S = readState(DATA) || readState(DATA + '.bak');
+if (S) console.log('state loaded · height', S.height); else { if (fs.existsSync(DATA)) { try { fs.renameSync(DATA, DATA + '.unreadable-' + Date.now()); } catch {} console.error('state file unreadable: kept aside, starting a new chain'); } S = fresh(); }
 const skCache = new Map(); const skOf = (v) => skCache.get(v.addr) || (skCache.set(v.addr, crypto.createPrivateKey(v.sk)), skCache.get(v.addr));
-let dirty = false; setInterval(() => { if (dirty) { dirty = false; fs.writeFile(DATA, JSON.stringify(S), () => {}); } }, 5000);
+// saves are atomic: write a temp file, keep the previous generation as .bak, then rename into place. One save at a time.
+let dirty = false, saving = false; const TMP = DATA + '.tmp', BAK = DATA + '.bak';
+const swap = () => { try { if (fs.existsSync(DATA)) fs.renameSync(DATA, BAK); } catch {} fs.renameSync(TMP, DATA); };
+const save = () => { if (!dirty || saving) return; dirty = false; saving = true; fs.writeFile(TMP, JSON.stringify(S), (e) => { try { if (e) throw e; swap(); } catch (x) { dirty = true; console.error('save failed', x.message); } saving = false; }); };
+setInterval(save, 15000);
+// a deploy or restart sends SIGTERM: write the state once more, synchronously, before leaving
+let leaving = false; for (const sig of ['SIGTERM', 'SIGINT']) process.on(sig, () => { if (leaving) return; leaving = true; try { fs.writeFileSync(TMP, JSON.stringify(S)); swap(); console.log('state saved on', sig, '· height', S.height); } catch (x) { console.error('final save failed', x.message); } process.exit(0); });
 const acct = (a) => S.accounts[a] || (S.accounts[a] = { bal: 0, nonce: 0, pub: null, txs: 0 });
 let mempool = [];
 
