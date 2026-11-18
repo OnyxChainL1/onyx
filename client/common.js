@@ -1,0 +1,21 @@
+// shared pill nav, footer and helpers for every ONYX page
+const X_URL = '{{X_URL}}', GH_URL = '{{GH_URL}}';
+// the mark: a cut stone, six facets around a polished table
+const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lgo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c8ccd2"/><stop offset="1" stop-color="#6f747d"/></linearGradient></defs><path d="M20 3 34.7 11.5v17L20 37 5.3 28.5v-17Z" fill="#131313" stroke="url(#lgo)" stroke-width="2"/><path d="M20 3v11M34.7 11.5 26 16M34.7 28.5 26 24M20 37V26M5.3 28.5 14 24M5.3 11.5 14 16" stroke="url(#lgo)" stroke-width="1.1" opacity=".7"/><path d="M20 14 26 16v8l-6 2-6-2v-8Z" fill="url(#lgo)"/></svg>';
+const NAV = [['/explorer', 'Explorer'], ['/wallet', 'Wallet'], ['/launchpad', 'Launchpad'], ['/dex', 'DEX'], ['/vault', 'Vaults'], ['/node', 'Run a node'], ['/rpc', 'Build']];
+const MORE = [['/lifeboat', 'Lifeboat'], ['/scan', 'Scanner'], ['/forge', 'Forge'], ['/validators', 'Validators'], ['/points', 'Points'], ['/docs', 'Docs'], ['/whitepaper', 'Whitepaper']];
+const XI = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 1.2h3.7l-8 9.2 9.4 12.4h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L.1 1.2h7.6l5.2 6.9 6-6.9Zm-1.3 19.4h2L6.5 3.3H4.3l13.3 17.3Z"/></svg>';
+function chrome(active, links) {
+  const h = document.createElement('header'); h.className = 'nav';
+  h.innerHTML = `<a class="logo" href="/">${LOGO}<span>ONYX</span></a><nav>${(links || NAV).map(([u, l]) => `<a href="${u}" class="${active === u ? 'on' : ''}">${l}</a>`).join('')}</nav><span class="pill"><span class="dot"></span><span id="navh">testnet</span></span>${X_URL ? `<a class="pbtn" style="padding:11px 12px" href="${X_URL}" target="_blank" rel="noopener" aria-label="ONYX on X">${XI}</a>` : ''}<a class="pbtn" href="/wallet">Open wallet ↗</a><button class="pbtn burger" aria-label="menu">menu</button>`;
+  document.body.prepend(h); h.querySelector('.burger').onclick = () => h.classList.toggle('open'); h.querySelectorAll('nav a').forEach((a) => a.addEventListener('click', () => h.classList.remove('open')));
+  const f = document.createElement('footer'); f.className = 'foot';
+  f.innerHTML = `<div class="wrap"><a class="logo" href="/">${LOGO}<span>ONYX</span></a><div class="fl">${[...NAV, ...MORE].map(([u, l]) => `<a href="${u}">${l}</a>`).join('')}${X_URL ? `<a href="${X_URL}" target="_blank" rel="noopener">X</a>` : ''}${GH_URL ? `<a href="${GH_URL}" target="_blank" rel="noopener">GitHub</a>` : ''}</div><p>ONYX is a quantum-resistant layer 1 running as a public testnet. Every block, attestation and transaction is signed with ML-DSA (FIPS 204) and hashed with SHA3-256.</p></div>`;
+  document.body.append(f);
+  setInterval(tickH, 4000); tickH(); return h;
+}
+async function tickH() { try { const s = await (await fetch('/api/stats')).json(); const e = document.getElementById('navh'); if (e) e.textContent = 'block #' + s.height.toLocaleString(); } catch {} }
+const short = (h, a = 8, b = 6) => h ? h.slice(0, a) + '…' + h.slice(-b) : '';
+const ago = (t) => { const s = Math.max(0, Math.round((Date.now() - t) / 1000)); return s < 60 ? s + 's ago' : s < 3600 ? Math.round(s / 60) + 'm ago' : Math.round(s / 3600) + 'h ago'; };
+function toast(m) { let t = document.querySelector('.toast'); if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.append(t); } t.textContent = m; t.classList.add('on'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('on'), 2600); }
+function copy(v) { navigator.clipboard.writeText(v).then(() => toast('Copied')); }
